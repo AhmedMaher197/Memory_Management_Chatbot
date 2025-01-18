@@ -63,7 +63,11 @@ ChatBot& ChatBot::operator=(const ChatBot& other)
     if(this == &other)
         return *this;
 
-    delete _image;
+    if(_image != NULL) // Attention: wxWidgets used NULL and not nullptr
+    {
+        delete _image;
+        _image = NULL;
+    }
 
     _image = new wxBitmap(*other._image);
 
@@ -100,7 +104,11 @@ ChatBot& ChatBot::operator= (ChatBot&& other)
     if(this == &other)
         return *this;
 
-    delete _image;
+    if(_image != NULL) // Attention: wxWidgets used NULL and not nullptr
+    {
+        delete _image;
+        _image = NULL;
+    }
 
     _image = other._image;
     _currentNode = other._currentNode;
